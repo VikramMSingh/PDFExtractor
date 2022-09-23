@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+issuer: Inditex Trent Retail India
+keywords:
+- Zara
+- Inditex
+fields:
+    amount: TOTAL:\s+(\d+,\d+\.\d\d)
+    date: Invoice Date:\s+(\d{1,2}\/\d{1,2}\/\d{4})
+    #delivery_date: Delivery Date:\s+(\d{1,2}\/\d{1,2}\/\d{4})
+    invoice_number: INVOICE NUMBER:\s+(\w{3}\d{1,8})
+    sales_order : Sales Order:\s+(\w{2}\d+)
+tables:
+    -   start: Reference\s+HS Code\s+Description\s+Quantity
+        end: Prices
+        body: (?P<Line>^\d{2})\s+(?P<Product>\w{2}\-\w{2}\-\w+\-\w+)\s+(?P<Description>\w+\s\w+\s\w+\-\w+)\s+(?P<Quantity>\d+)
+
+options:
+    remove_whitespace: false
+    currency: USD
+    date_formats:
+        - '%d/%m/%Y'
+    languages:
+        - en
+decimal_separator: '.'
